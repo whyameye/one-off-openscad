@@ -8,6 +8,11 @@ difference() {
 for ( i = [0 : 90 : 360] ) {
 rotate([i,0,0])
 translate([-1,10,0])
-cube([10,5,1],center=true);
+cube([10,10,1],center=true);
 }
 }
+translate([20,0,0])
+rotate([0,90,0])
+cylinder(h=10,r=5);
+translate([38,0,0])
+sphere(10);
