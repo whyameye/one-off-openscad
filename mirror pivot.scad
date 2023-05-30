@@ -1,18 +1,31 @@
-// sphere in car is 9.75mm
-// sphere is 8mm deep
+// ball in mirror frame is 9.75mm
+// ball is 8mm deep
+// socket in mirror plate is 6mm deep
 
+$fn=100;
+
+// socket for mirror frame assembly to snap into
 difference() {
-    translate([7,0,0])
-    sphere(15);
-    sphere(10);
-for ( i = [0 : 90 : 360] ) {
-rotate([i,0,0])
-translate([-1,10,0])
-cube([10,10,1],center=true);
+    translate([2,0,0])
+        scale([.9,1.1,1.1])
+            sphere(d=12);
+    scale([1.1,1,1])
+        sphere(d=10);
+    for ( i = [0 : 90 : 360] ) {
+        rotate([i,0,0])
+            translate([-5,5,0])
+                cube([15,10,1],center=true);
+    }
 }
-}
-translate([20,0,0])
-rotate([0,90,0])
-cylinder(h=10,r=5);
-translate([38,0,0])
-sphere(10);
+
+// ball for mirror plate to clip into
+translate([6,0,0])
+    rotate([0,90,0])
+        cylinder(h=8,d=6); // 5 broke
+translate([11,0,0]) // 12
+    sphere(d=10);
+
+// circle for debugging size of socket opening
+//translate([-5,0,0])
+    //rotate([0,90,0])
+        //circle(d=8);
