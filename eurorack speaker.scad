@@ -1,3 +1,8 @@
+// things to check:
+// size of holes in bosses
+// make the panel thinner when testing
+
+
 $fn=50;
 
 panelHeight = 128.5;
