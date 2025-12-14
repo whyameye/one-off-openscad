@@ -7,6 +7,7 @@ $fn=50;
 
 panelHeight = 128.5;
 panelWidth = 81;
+panelDepth = 1.5;
 speakerDiam = 50;
 speakerDistFromEdge = 11;
 
@@ -77,7 +78,7 @@ module speakerMountHoles() {
 
 module all() {
     difference() {
-        cube([panelWidth,panelHeight,1.5]);
+        cube([panelWidth,panelHeight,panelDepth]);
         speakerHole();
         powerVolAndLightHoles();            
     }
