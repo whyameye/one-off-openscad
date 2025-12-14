@@ -5,16 +5,22 @@
 
 $fn=50;
 
-panelHeight = 128.5;
-panelWidth = 81;
-panelDepth = 1.5;
+panelHeight = 130.5;
+panelWidth = 81.5;
+panelDepth = 3;
+
+bossDiam = 6;
+bossHoleDiam = 2.25;
+
 speakerDiam = 50;
 speakerDistFromEdge = 11;
 
-ampBossLen = 31;
-ampDistFromEdge=12;
+speakerBossLen = 7;
 
-powAndVolHeight=panelHeight-30;
+ampBossLen = 31;
+ampDistFromEdge=14;
+
+powAndVolHeight=panelHeight-32;
 
 module doPowerAndVolText() {
     linear_extrude(panelDepth + 0.5) {
@@ -31,66 +37,85 @@ module doPowerVolAndLightHoles() {
         cylinder(10,d=5.5);
         translate([12,0,0])
             //light
-            cylinder(10, d=8);
+            cylinder(10, d=9);
     }
-    translate([panelWidth-17-7/2, powAndVolHeight, -5])
+    translate([panelWidth-17-8/2, powAndVolHeight, -5])
             //vol
-            cylinder(10, d=7);
+            cylinder(10, d=8);
 }
 
 module doAmpBosses() {
-    translate([0,panelHeight-ampDistFromEdge-5/2, -ampBossLen]) {
-        translate([22,0,0])
-            cylinder(ampBossLen, d=5);
-        translate([55,-47,0])
-            cylinder(ampBossLen, d=5);
+    translate([0,panelHeight-ampDistFromEdge-bossDiam/2, -ampBossLen]) {
+        translate([21.5,1,0])
+            cylinder(ampBossLen, d=bossDiam);
+        translate([54.5,-48,-3])
+            cylinder(ampBossLen+3, d=bossDiam);
     }
 }
 
 module doAmpMountHoles() {
-  translate([0,panelHeight-ampDistFromEdge-5/2, -ampBossLen-5]) {
-        translate([22,0,0])
-            cylinder(ampBossLen+10, d=2);
-        translate([55,-47,0])
-            cylinder(ampBossLen+10, d=2);
+  translate([0,panelHeight-ampDistFromEdge-bossDiam/2, -ampBossLen-5]) {
+        translate([21.5,1,0])
+            cylinder(ampBossLen+10, d=bossHoleDiam);
+        translate([54.5,-48,0])
+            cylinder(ampBossLen+10, d=bossHoleDiam);
     }
 }
 
 module doSpeakerHole() {
     speakerRadius = speakerDiam / 2.0;
     translate([panelWidth/2,speakerRadius+speakerDistFromEdge,-10])
-        cylinder(20, d=50);
+        cylinder(20, d=speakerDiam);
 }
 
 module doSpeakerBosses() {
-    translate([panelWidth/2-45/2,speakerDistFromEdge+5/2,-8]) {
-        cylinder(8, d=5);
+    translate([panelWidth/2-45/2,speakerDistFromEdge+bossDiam/2,-8]) {
+        cylinder(speakerBossLen, d=bossDiam);
         translate([45,0,0])
-            cylinder(8, d=5);
+            cylinder(speakerBossLen, d=bossDiam);
         translate([0,45,0])
-            cylinder(8, d=5);
+            cylinder(speakerBossLen, d=bossDiam);
         translate([45,45,0])
-            cylinder(8, d=5);
+            cylinder(speakerBossLen, d=bossDiam);
     }
 }
 
 module doSpeakerMountHoles() {
-    translate([panelWidth/2-45/2,speakerDistFromEdge+5/2,-10]) {
-          cylinder(18, d=2);
+    translate([panelWidth/2-45/2,speakerDistFromEdge+bossDiam/2,-10]) {
+          cylinder(18, d=bossHoleDiam);
         translate([45,0,0])
-            cylinder(18, d=2);
+            cylinder(18, d=bossHoleDiam);
         translate([0,45,0])
-            cylinder(18, d=2);
+            cylinder(18, d=bossHoleDiam);
         translate([45,45,0])
-            cylinder(18, d=2);
+            cylinder(18, d=bossHoleDiam);
     }   
+}
+
+module makeSlot(x,y) {
+    hull() {
+        translate([x+4/2,y+4/2,-10]) {
+            cylinder(18,d=4);
+            translate([6,0,0])
+                cylinder(18,d=4);
+        }
+    }
+}
+
+module doMountHoles() {
+    makeSlot(5,1);
+    makeSlot(panelWidth-5-8-4/2,1);
+    makeSlot(5,panelHeight-1-4);
+    makeSlot(panelWidth-5-8-4/2,panelHeight-1-4);
+
 }
 
 module doAll() {
     difference() {
         cube([panelWidth,panelHeight,panelDepth]);
         doSpeakerHole();
-        doPowerVolAndLightHoles();            
+        doPowerVolAndLightHoles();
+        doMountHoles();
     }
     difference() {
         doSpeakerBosses();
@@ -100,7 +125,7 @@ module doAll() {
         doAmpBosses();
         doAmpMountHoles();
     }
-    doPowerAndVolText();
+    //doPowerAndVolText();
 }
 
 doAll();
