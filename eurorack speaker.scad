@@ -7,7 +7,7 @@ $fn=50;
 
 panelHeight = 130.5;
 panelWidth = 81.5;
-panelDepth = 2;
+panelDepth = 2.25;
 
 bossDiam = 6;
 bossHoleDiam = 2.25;
@@ -24,7 +24,7 @@ powAndVolHeight=panelHeight-52;
 poweAndValTextLocBelow=9;
 
 module doPowerAndVolText() {
-    linear_extrude(panelDepth + 0.5) {
+    linear_extrude(panelDepth + 1) {
         translate([17+5.5/2, powAndVolHeight +25-poweAndValTextLocBelow, 0])
             text(halign = "center", size = 4, "audio in");
         translate([17+5.5/2, powAndVolHeight - poweAndValTextLocBelow, 0])
