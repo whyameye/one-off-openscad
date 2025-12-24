@@ -7,7 +7,7 @@ $fn=50;
 
 panelHeight = 130.5;
 panelWidth = 81.5;
-panelDepth = 3;
+panelDepth = 2.25;
 
 bossDiam = 6;
 bossHoleDiam = 2.25;
@@ -20,18 +20,23 @@ speakerBossLen = 7;
 ampBossLen = 31;
 ampDistFromEdge=14;
 
-powAndVolHeight=panelHeight-32;
+powAndVolHeight=panelHeight-52;
+poweAndValTextLocBelow=9;
 
 module doPowerAndVolText() {
-    linear_extrude(panelDepth + 0.5) {
-        translate([17+5.5/2, powAndVolHeight - 10, 0])
+    linear_extrude(panelDepth + 1) {
+        translate([17+5.5/2, powAndVolHeight +25-poweAndValTextLocBelow, 0])
+            text(halign = "center", size = 4, "audio in");
+        translate([17+5.5/2, powAndVolHeight - poweAndValTextLocBelow, 0])
             text(halign = "center", size = 4, "power");
-        translate([panelWidth-17-7/2, powAndVolHeight - 10, 0])
+        translate([panelWidth-17-7/2, powAndVolHeight - poweAndValTextLocBelow, 0])
             text(halign = "center", size = 4, "volume");
     }
 }
 
 module doPowerVolAndLightHoles() {
+    translate([17+5.5/2, powAndVolHeight+25, -5])
+        cylinder(10, d=7);
     translate([17+5.5/2, powAndVolHeight, -5]) {
         //power 
         cylinder(10,d=5.5);
@@ -69,7 +74,7 @@ module doSpeakerHole() {
 }
 
 module doSpeakerBosses() {
-    translate([panelWidth/2-45/2,speakerDistFromEdge+bossDiam/2,-8]) {
+    translate([panelWidth/2-45/2,speakerDistFromEdge+bossDiam/2,-speakerBossLen]) {
         cylinder(speakerBossLen, d=bossDiam);
         translate([45,0,0])
             cylinder(speakerBossLen, d=bossDiam);
@@ -103,10 +108,10 @@ module makeSlot(x,y) {
 }
 
 module doMountHoles() {
-    makeSlot(5,1);
-    makeSlot(panelWidth-5-8-4/2,1);
-    makeSlot(5,panelHeight-1-4);
-    makeSlot(panelWidth-5-8-4/2,panelHeight-1-4);
+    makeSlot(5,2);
+    makeSlot(panelWidth-5-8-4/2,2);
+    makeSlot(5,panelHeight-2-4);
+    makeSlot(panelWidth-5-8-4/2,panelHeight-2-4);
 
 }
 
@@ -125,7 +130,7 @@ module doAll() {
         doAmpBosses();
         doAmpMountHoles();
     }
-    //doPowerAndVolText();
+    doPowerAndVolText();
 }
 
 doAll();
