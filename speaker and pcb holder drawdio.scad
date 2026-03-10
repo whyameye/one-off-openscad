@@ -34,6 +34,9 @@ module speaker_brace() {
             translate([-y/2*x, y/2*x, -4.5]) cylinder(z,d=12);
         }
         cylinder(4.5,d=52);
+        translate([0,0, -4.5])
+            difference() { cylinder(9,d=90); cylinder(9,d=80);}
+
         translate([y/2*x, y/2*x, -4.5]) cylinder(z,d=4);
         translate([y/2*x, -y/2*x, -4.5]) cylinder(z,d=4);
         translate([-y/2*x, -y/2*x, -4.5]) cylinder(z,d=4);
@@ -43,5 +46,5 @@ module speaker_brace() {
 
 rotate([180,0,0]) {
 speaker_brace();
-translate([45,-20,1.5]) PCB_brace();
+//translate([45,-20,1.5]) PCB_brace();
 }
