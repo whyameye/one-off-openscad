@@ -209,7 +209,7 @@ module lid_holes() {
     
     // JOHN ADD START
     translate([int_w/2,int_l/2,0])
-	translate([.5,.5]*[int_w,int_l])
+	//translate([.5,.5]*[int_w,int_l])
 	circle(d=55);
     
     translate([(int_w-60)/2,(int_l-60)/2,0])
