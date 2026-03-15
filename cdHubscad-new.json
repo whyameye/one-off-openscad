@@ -1,0 +1,18 @@
+{
+    "parameterSets": {
+        "design default values": {
+            "$fn": "30",
+            "backDiam": "40",
+            "backWidth": "5",
+            "cdDiam": "14.5",
+            "cdEps": "0.25",
+            "hexSize": "6.05",
+            "makeTheCap": "true",
+            "makeTheHub": "true",
+            "motorShaftDiam": "2.3",
+            "motorShaftLen": "6",
+            "threadLen": "10"
+        }
+    },
+    "fileFormatVersion": "1"
+}
