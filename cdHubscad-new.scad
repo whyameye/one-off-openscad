@@ -11,8 +11,10 @@ threadLen = 10;
 /* [hub] */
 cdDiam=14.5;
 hubShaftLen=25-threadLen;
-motorShaftDiam=2.3; // was 2.25
+motorShaftDiam=2.3; // [2.3, 3.5]
 motorShaftLen=6;
+motorShaftShape = "circle"; // [circle, hexagon]
+
 cdEps=.25;
 
 /* [backing] */
@@ -28,6 +30,8 @@ motorShaftRadius = motorShaftDiam/2.0;
 backRadius = backDiam / 2.0;
 
 module makeHubShaft() {
+    myfn = (motorShaftShape == "circle" ? $fn : 6);
+
     difference() {
         union() {
             translate([0,0,backWidth])
@@ -36,7 +40,7 @@ module makeHubShaft() {
             translate([0,0,backWidth+hubShaftLen])
         RodStart(20, 0, thread_len=threadLen, thread_diam=cdDiam-2*cdEps);
         }
-        cylinder(motorShaftLen, motorShaftRadius, motorShaftRadius);
+        cylinder(motorShaftLen, motorShaftRadius, motorShaftRadius, $fn = myfn);
         translate([0,0,20-threadLen])
             cylinder(20,hexSize/2,hexSize/2,$fn=6);
     }
@@ -44,7 +48,7 @@ module makeHubShaft() {
 
 module makeCap() {
         //translate([0,0,backWidth+hubShaftLen])
-    moreEps = 0.5; // maybe increasing will help binding when threading onto hub?
+    moreEps = 0.5; // empty space in non-threaded area (prevent binding)
 
     RodEnd(threadLen+10, 9, thread_len=20,thread_diam=cdDiam-2*cdEps);
     
