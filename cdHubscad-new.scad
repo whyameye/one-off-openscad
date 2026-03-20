@@ -44,7 +44,7 @@ module makeHubShaft() {
 
 module makeCap() {
         //translate([0,0,backWidth+hubShaftLen])
-    moreEps = 0; // maybe increasing will help binding when threading onto hub?
+    moreEps = 0.5; // maybe increasing will help binding when threading onto hub?
 
     RodEnd(threadLen+10, 9, thread_len=20,thread_diam=cdDiam-2*cdEps);
     
