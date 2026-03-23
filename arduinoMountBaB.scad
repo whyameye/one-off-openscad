@@ -1,7 +1,7 @@
 boxDepth=8;
 boxLReduct=10;
 translate([37.6,0,0]) {
-    import("/tmp/Arduino_uno_R3_clip_Base_Rv_02.stl");
+    import("Arduino_uno_R3_clip_Base_Rv_02.stl");
     difference() {
         translate([-37.6,-26.9,-boxDepth])
             cube([110-boxLReduct,53.3,boxDepth]);
