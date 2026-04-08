@@ -342,7 +342,7 @@ module the_box() {
 }
 
 module the_lid() {
-	translate(measure_from == "int" ? [0,0] : [wall_th,wall_th])
+	translate(measure_from == "int" ? [0,0] : [wall_th,wall_th]) {
 	linear_extrude(height=lid_th, convexity=2)
 	difference() {
 		translate([1,1] * lid_tol_xy)
@@ -350,7 +350,12 @@ module the_lid() {
 
 		offset(delta=0.5)
 		lid_holes();
+		translate([int_w/2-32/2, int_l/2-60/2])
+            square([32,60]);
+        translate([int_w/2-12/2, int_l-20])
+        square([12,20]);
 	}
+}
 }
 
 module main() {
